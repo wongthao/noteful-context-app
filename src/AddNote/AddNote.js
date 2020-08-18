@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ApiContext from '../ApiContext';
 import ValidateForm from '../ValidateForm/ValidateForm'
 import config from '../config';
-
+import './addNote.css'
 
 
 class AddNote extends Component{
@@ -18,6 +18,8 @@ class AddNote extends Component{
       }
 
 static contextType = ApiContext;
+
+
 
 validateName(fieldValue) {
     const fieldErrors = {...this.state.validationMessages};
@@ -93,7 +95,9 @@ handleSubmit = e => {
                 <label htmlFor="NoteName">Note Name</label>
                 <input type="text" id="NoteName" name="NoteName" 
                  onChange={e => this.updateName(e.target.value)}/>
+
                  <ValidateForm className='validationError' hasError={!this.state.name} message={this.state.validationMessages.name}></ValidateForm>
+                 
                 <br />
                 <label htmlFor="Content">Content</label>
                 <input type="text" id="Content" name="content" />

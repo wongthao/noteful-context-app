@@ -25,7 +25,7 @@ export default class NoteListMain extends React.Component {
         <ul>
           {notesForFolder.map(note =>
             <li key={note.id}>
-              <LoadingError key={note.id}>
+              <LoadingError>
                 <Note
                   id={note.id}
                   name={note.name}

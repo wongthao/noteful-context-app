@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import ValidateForm from '../ValidateForm/ValidateForm'
-
+import './addFolder.css'
 
 class AddFolder extends Component{
 
@@ -91,6 +91,7 @@ handleSubmit = e => {
         return(
             <section className= "addFolder">
                 <h2>Create Folder</h2>
+                <br />
                 <form 
                     className= 'addFolder-form'
                     onSubmit={this.handleSubmit}
@@ -100,7 +101,7 @@ handleSubmit = e => {
                     </label>
                     <input type = "text" id= 'folderName' name="folderName" onChange={e => this.updateName(e.target.value)} />
                     <ValidateForm className="validateionError" hasError={!this.state.name} message={this.state.validationMessages.name}></ValidateForm>
-                    <button type= "submit" disabled={!this.state.formValid}>Submit
+                    <button className="addFolder-button" type= "submit" disabled={!this.state.formValid}>Submit
 
                     </button>
                 </form>
