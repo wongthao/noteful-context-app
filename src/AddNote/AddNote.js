@@ -9,6 +9,8 @@ class AddNote extends Component{
     constructor(props){
         super(props);
         this.state = {
+          optionValid: false,
+          option:'',  
           nameValid: false,
           name: '',
           validationMessages: {
@@ -16,6 +18,8 @@ class AddNote extends Component{
           }
         }
       }
+
+
 
 static contextType = ApiContext;
 
@@ -45,6 +49,26 @@ validateName(fieldValue) {
     this.setState({name}, ()=>{this.validateName(name)});
   }
 
+
+validateOption(fieldValue) {
+  let hasError= "false";
+
+  fieldValue=fieldValue.trim();
+  if(fieldValue === ""){
+    hasError = true;
+  }
+  else{
+    hasError =false;
+  }
+  this.setState({
+    optionValid: !hasError
+  })
+
+}
+
+  updateOption(option){
+    this.setState({option}, ()=>{this.validateOption(option)});
+  }
 
 handleSubmit = e => {
     e.preventDefault()
@@ -103,8 +127,8 @@ handleSubmit = e => {
                 <input type="text" id="Content" name="content" />
                 <br />
                 <label htmlFor="FolderName">FolderName</label>
-                <select id='FolderName' name='FolderName'> 
-                    <option value={null}>...</option>
+                <select id='FolderName' name='FolderName' onChange ={e => this.updateOption(e.target.value)}> 
+                    <option value="" >Choose Folder</option>
                     {this.context.folders.map(folder =>
                         <option key={folder.id} value={folder.id}>
                         {folder.name}
@@ -112,11 +136,15 @@ handleSubmit = e => {
                     )}
                 </select>
                 
-
-                <button type= "submit" disabled={!this.state.formValid}>Submit</button>
+                <button type= "submit" disabled={!this.state.formValid || !this.state.optionValid}>Submit</button>
             </form>
         )
     }
 }
 
+
+
+
+
 export default AddNote;
+
